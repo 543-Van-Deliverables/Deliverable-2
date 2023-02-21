@@ -8,7 +8,34 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
-plot(cars)
+Glink="https://github.com/543-Van-Deliverables/Deliverable-2/raw/main/"
+Flink="us-states.csv"
+CDD=read.csv(paste0(Glink,Flink))
+```
+```{r}
+names(CDD)
+```
+
+
+```{r}
+summary(CDD$deaths)
+```
+```{r}
+library(ggplot2)
+base=ggplot(data=CDD, aes(x=date, y=deaths))
+base+geom_boxplot()
+```
+```{r}
+tapply(CDD$deaths,
+       CDD$date, summary)
+```
+```{r}
+baseHY=ggplot(data=CDD, aes(x=deaths))
+histHY=baseHY+geom_histogram(aes(fill=date), color='black')
+histHY
+```
+```{r}
+
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
