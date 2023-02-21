@@ -9,34 +9,41 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 
 ```{r}
 Glink="https://github.com/543-Van-Deliverables/Deliverable-2/raw/main/"
-Flink="us-states.csv"
-CDD=read.csv(paste0(Glink,Flink))
+Flink="CountryRankingFinal.csv"
+CRF=read.csv(paste0(Glink,Flink))
 ```
 ```{r}
-names(CDD)
+names(CRF)
 ```
 
 
 ```{r}
-summary(CDD$deaths)
+summary(CRF$Fertility)
 ```
 ```{r}
 library(ggplot2)
-base=ggplot(data=CDD, aes(x=date, y=deaths))
-base+geom_boxplot()
+base=ggplot(data=CRF, aes(x=Region, y=Fertility))
+base+geom_boxplot() + theme(axis.text.x = element_text(angle = 90,size = 8,vjust = .5))
 ```
 ```{r}
-tapply(CDD$deaths,
-       CDD$date, summary)
+tapply(CRF$Fertility,CRF$Region, summary)
 ```
 ```{r}
-baseHY=ggplot(data=CDD, aes(x=deaths))
-histHY=baseHY+geom_histogram(aes(fill=date), color='black')
-histHY
-```
-```{r}
+titleText="Fertility Rates of Women Around the World"
 
+baseflip=base + geom_boxplot() + 
+        labs(title = titleText)
+
+baseflip  + coord_flip()
 ```
+
+
+```{r}
+baseHY=ggplot(data=CRF,aes(x=Fertility)) 
+histHY=baseHY + geom_histogram(aes(fill=Region), color='black')
+histHY + ggtitle("Fertility Rates of Women Around the World") + labs(x="Fertility (children born/woman)",y="Count")  
+```
+
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
 
