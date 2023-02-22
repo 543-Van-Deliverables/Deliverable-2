@@ -1,7 +1,6 @@
 ---
 title: "Index"
 output:
-  github_document: default
   html_document:
     df_print: paged
 ---
